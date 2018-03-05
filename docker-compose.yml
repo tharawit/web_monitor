@@ -1,22 +1,20 @@
-version: '2'
-
-services:
-   db:
-     build: ./mysql
-     volumes:
-       - db_data:/var/lib/mysql
-     environment:
-       MYSQL_ROOT_PASSWORD: root
-   php:
-    build: ./php
-    ports:
-      - '8000:80'
-    restart: always
-    volumes:
-       - /var/log/apache2/error.log:/var/log/apache2/error.log
-       - /var/log/apache2/access.log:/var/log/apache2/access.log
-       - /var/www/html/ProjectRoot/:/var/www/html
-    depends_on:
-      - db
-volumes:
-    db_data:
+db:
+  image: mysql:latest
+  ports:
+    - "3306:3306"
+  volumes:
+    - ./var/mysql:/var/lib/mysql
+  environment:
+    - MYSQL_DATABASE=db
+    - MYSQL_USER=dbuser
+    - MYSQL_PASSWORD=1234
+    - MYSQL_ROOT_PASSWORD=1234
+# web:
+#   image: tutum/apache-php
+#   ports:
+#     - "80:80"
+#     - "443:443"
+#   links:
+#     - db
+#   volumes:
+#     - ./www/public:/app
