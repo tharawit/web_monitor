@@ -12,5 +12,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return view('home', ['name' => 'James']);
 });
+
+$router->get('/about', function () use ($router) {
+    return view('about');
+});
+
