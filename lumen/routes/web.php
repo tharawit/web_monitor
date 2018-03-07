@@ -15,7 +15,7 @@ $router->get('/', function () use ($router) {
     return view('home', ['name' => 'James']);
 });
 
-$router->get('/about', function () use ($router) {
-    return view('about');
+$router->get('/simple', function () use ($router) {
+    return view('simple');
 });
 
