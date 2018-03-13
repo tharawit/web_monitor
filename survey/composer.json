@@ -1,0 +1,12 @@
+{
+    "name": "tharawitsantuenkaew/survey",
+    "authors": [
+        {
+            "name": "tharawit55",
+            "email": "tharawit55@gmail.com"
+        }
+    ],
+    "require": {
+        "facebook/graph-sdk": "^5.6"
+    }
+}
