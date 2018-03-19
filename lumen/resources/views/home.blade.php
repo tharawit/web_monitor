@@ -10,5 +10,5 @@
 @endsection
 
 @section('right')
-    <a href="/simple">View</a>
+<h1> Error Authentication</h1>
 @endsection

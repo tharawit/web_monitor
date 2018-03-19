@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/app-info.php'; // app information
 require_once __DIR__ . '/vendor/autoload.php'; // change path as needed
 
@@ -11,7 +12,7 @@ $fb = new \Facebook\Facebook([
 $helper = $fb->getRedirectLoginHelper();
   
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('http://localhost/fb-callback.php', $permissions);
+$loginUrl = $helper->getLoginUrl('http://localhost:8000/fb-callback.php', $permissions);
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 echo '<br>';
 print_r($permissions);
