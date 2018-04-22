@@ -10,15 +10,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Composer\Autoload;
+namespace ComposerAutoload;
 
 /**
  * ClassLoader implements a PSR-0, PSR-4 and classmap class loader.
  *
- *     $loader = new \Composer\Autoload\ClassLoader();
+ *     $loader = new ComposerAutoloadClassLoader();
  *
  *     // register classes with namespaces
- *     $loader->add('Symfony\Component', __DIR__.'/component');
+ *     $loader->add('SymfonyComponent', __DIR__.'/component');
  *     $loader->add('Symfony',           __DIR__.'/framework');
  *
  *     // activate the autoloader
@@ -27,8 +27,8 @@ namespace Composer\Autoload;
  *     // to enable searching the include path (eg. for PEAR packages)
  *     $loader->setUseIncludePath(true);
  *
- * In this example, if you try to use a class in the Symfony\Component
- * namespace or one of its children (Symfony\Component\Console for instance),
+ * In this example, if you try to use a class in the SymfonyComponent
+ * namespace or one of its children (SymfonyComponentConsole for instance),
  * the autoloader will first look for the class under the component/
  * directory, and it will then fallback to the framework/ directory if not
  * found before giving up.
@@ -147,11 +147,11 @@ class ClassLoader
      * Registers a set of PSR-4 directories for a given namespace, either
      * appending or prepending to the ones previously set for this namespace.
      *
-     * @param string       $prefix  The prefix/namespace, with trailing '\\'
+     * @param string       $prefix  The prefix/namespace, with trailing ''
      * @param array|string $paths   The PSR-4 base directories
      * @param bool         $prepend Whether to prepend the directories
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function addPsr4($prefix, $paths, $prepend = false)
     {
@@ -171,8 +171,8 @@ class ClassLoader
         } elseif (!isset($this->prefixDirsPsr4[$prefix])) {
             // Register directories for a new namespace.
             $length = strlen($prefix);
-            if ('\\' !== $prefix[$length - 1]) {
-                throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
+            if ('' !== $prefix[$length - 1]) {
+                throw new InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
@@ -211,10 +211,10 @@ class ClassLoader
      * Registers a set of PSR-4 directories for a given namespace,
      * replacing any others previously set for this namespace.
      *
-     * @param string       $prefix The prefix/namespace, with trailing '\\'
+     * @param string       $prefix The prefix/namespace, with trailing ''
      * @param array|string $paths  The PSR-4 base directories
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setPsr4($prefix, $paths)
     {
@@ -222,8 +222,8 @@ class ClassLoader
             $this->fallbackDirsPsr4 = (array) $paths;
         } else {
             $length = strlen($prefix);
-            if ('\\' !== $prefix[$length - 1]) {
-                throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
+            if ('' !== $prefix[$length - 1]) {
+                throw new InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
             $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
@@ -370,14 +370,14 @@ class ClassLoader
     private function findFileWithExtension($class, $ext)
     {
         // PSR-4 lookup
-        $logicalPathPsr4 = strtr($class, '\\', DIRECTORY_SEPARATOR) . $ext;
+        $logicalPathPsr4 = strtr($class, '', DIRECTORY_SEPARATOR) . $ext;
 
         $first = $class[0];
         if (isset($this->prefixLengthsPsr4[$first])) {
             $subPath = $class;
-            while (false !== $lastPos = strrpos($subPath, '\\')) {
+            while (false !== $lastPos = strrpos($subPath, '')) {
                 $subPath = substr($subPath, 0, $lastPos);
-                $search = $subPath.'\\';
+                $search = $subPath.'';
                 if (isset($this->prefixDirsPsr4[$search])) {
                     $pathEnd = DIRECTORY_SEPARATOR . substr($logicalPathPsr4, $lastPos + 1);
                     foreach ($this->prefixDirsPsr4[$search] as $dir) {
@@ -397,7 +397,7 @@ class ClassLoader
         }
 
         // PSR-0 lookup
-        if (false !== $pos = strrpos($class, '\\')) {
+        if (false !== $pos = strrpos($class, '')) {
             // namespaced class name
             $logicalPathPsr0 = substr($logicalPathPsr4, 0, $pos + 1)
                 . strtr(substr($logicalPathPsr4, $pos + 1), '_', DIRECTORY_SEPARATOR);

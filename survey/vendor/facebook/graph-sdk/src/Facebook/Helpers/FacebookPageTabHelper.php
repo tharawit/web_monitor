@@ -21,10 +21,10 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\Helpers;
+namespace FacebookHelpers;
 
-use Facebook\FacebookApp;
-use Facebook\FacebookClient;
+use FacebookFacebookApp;
+use FacebookFacebookClient;
 
 /**
  * Class FacebookPageTabHelper

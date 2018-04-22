@@ -76,12 +76,12 @@ html {
   
   #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
     float: right;
-    content: '\f107';
+    content: 'f107';
     font-family: 'FontAwesome';
   }
   
   #mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse.collapsed:after {
-    content: '\f105';
+    content: 'f105';
   }
   
   #mainNav .navbar-collapse .navbar-sidenav .sidenav-second-level,
@@ -121,7 +121,7 @@ html {
   #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
     float: right;
     width: auto;
-    content: '\f105';
+    content: 'f105';
     border: none;
     font-family: 'FontAwesome';
   }
@@ -134,7 +134,7 @@ html {
   }
   
   #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown.show > .nav-link:after {
-    content: '\f107';
+    content: 'f107';
   }
   
   #mainNav .navbar-collapse .navbar-nav > .nav-item.dropdown .dropdown-menu > .dropdown-item > .dropdown-message {

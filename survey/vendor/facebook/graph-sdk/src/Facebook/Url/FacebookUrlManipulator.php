@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\Url;
+namespace FacebookUrl;
 
 /**
  * Class FacebookUrlManipulator
@@ -162,6 +162,6 @@ class FacebookUrlManipulator
      */
     public static function baseGraphUrlEndpoint($urlToTrim)
     {
-        return '/' . preg_replace('/^https:\/\/.+\.facebook\.com(\/v.+?)?\//', '', $urlToTrim);
+        return '/' . preg_replace('/^https://.+.facebook.com(/v.+?)?//', '', $urlToTrim);
     }
 }

@@ -1,0 +1,18 @@
+CREATE TABLE `user` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `fb_id` varchar(50) NOT NULL,
+    `name` varchar(50) NOT NULL,
+    `email` varchar(50) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `survey` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`id`),
+    `group_id` varchar(100) NOT NULL,
+    `group_name` varchar(100) NOT NULL,
+    `group_banner` varchar(100) NOT NULL,
+    `graph_areachar` varchar(100) NOT NULL,
+    `graph_barchar` varchar(100) NOT NULL,
+    `graph_pechar` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

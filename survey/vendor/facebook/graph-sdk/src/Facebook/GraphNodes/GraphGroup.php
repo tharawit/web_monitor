@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace FacebookGraphNodes;
 
 /**
  * Class GraphGroup
@@ -34,8 +34,8 @@ class GraphGroup extends GraphNode
      * @var array Maps object key names to GraphNode types.
      */
     protected static $graphObjectMap = [
-        'cover' => '\Facebook\GraphNodes\GraphCoverPhoto',
-        'venue' => '\Facebook\GraphNodes\GraphLocation',
+        'cover' => 'FacebookGraphNodesGraphCoverPhoto',
+        'venue' => 'FacebookGraphNodesGraphLocation',
     ];
 
     /**
@@ -149,9 +149,9 @@ class GraphGroup extends GraphNode
     }
 
     /**
-     * Returns the `updated_time` (The last time the Group was updated (this includes changes in the Group's properties and changes in posts and comments if user can see them)) as \DateTime if present.
+     * Returns the `updated_time` (The last time the Group was updated (this includes changes in the Group's properties and changes in posts and comments if user can see them)) as DateTime if present.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getUpdatedTime()
     {

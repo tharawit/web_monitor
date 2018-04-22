@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\FileUpload;
+namespace FacebookFileUpload;
 
 /**
  * Class FacebookTransferChunk

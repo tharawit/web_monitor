@@ -21,9 +21,9 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\PseudoRandomString;
+namespace FacebookPseudoRandomString;
 
-use Facebook\Exceptions\FacebookSDKException;
+use FacebookExceptionsFacebookSDKException;
 use InvalidArgumentException;
 
 class PseudoRandomStringGeneratorFactory
@@ -38,7 +38,7 @@ class PseudoRandomStringGeneratorFactory
      *
      * @param PseudoRandomStringGeneratorInterface|string|null $generator
      *
-     * @throws InvalidArgumentException If the pseudo random string generator must be set to "random_bytes", "mcrypt", "openssl", or "urandom", or be an instance of Facebook\PseudoRandomString\PseudoRandomStringGeneratorInterface.
+     * @throws InvalidArgumentException If the pseudo random string generator must be set to "random_bytes", "mcrypt", "openssl", or "urandom", or be an instance of FacebookPseudoRandomStringPseudoRandomStringGeneratorInterface.
      *
      * @return PseudoRandomStringGeneratorInterface
      */
@@ -65,7 +65,7 @@ class PseudoRandomStringGeneratorFactory
             return new UrandomPseudoRandomStringGenerator();
         }
 
-        throw new InvalidArgumentException('The pseudo random string generator must be set to "random_bytes", "mcrypt", "openssl", or "urandom", or be an instance of Facebook\PseudoRandomString\PseudoRandomStringGeneratorInterface');
+        throw new InvalidArgumentException('The pseudo random string generator must be set to "random_bytes", "mcrypt", "openssl", or "urandom", or be an instance of FacebookPseudoRandomStringPseudoRandomStringGeneratorInterface');
     }
 
     /**

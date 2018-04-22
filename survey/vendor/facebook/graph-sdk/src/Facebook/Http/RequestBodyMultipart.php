@@ -21,9 +21,9 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\Http;
+namespace FacebookHttp;
 
-use Facebook\FileUpload\FacebookFile;
+use FacebookFileUploadFacebookFile;
 
 /**
  * Class RequestBodyMultipartt
@@ -82,7 +82,7 @@ class RequestBodyMultipart implements RequestBodyInterface
         }
 
         // Peace out
-        $body .= "--{$this->boundary}--\r\n";
+        $body .= "--{$this->boundary}--rn";
 
         return $body;
     }
@@ -108,7 +108,7 @@ class RequestBodyMultipart implements RequestBodyInterface
     private function getFileString($name, FacebookFile $file)
     {
         return sprintf(
-            "--%s\r\nContent-Disposition: form-data; name=\"%s\"; filename=\"%s\"%s\r\n\r\n%s\r\n",
+            "--%srnContent-Disposition: form-data; name="%s"; filename="%s"%srnrn%srn",
             $this->boundary,
             $name,
             $file->getFileName(),
@@ -128,7 +128,7 @@ class RequestBodyMultipart implements RequestBodyInterface
     private function getParamString($name, $value)
     {
         return sprintf(
-            "--%s\r\nContent-Disposition: form-data; name=\"%s\"\r\n\r\n%s\r\n",
+            "--%srnContent-Disposition: form-data; name="%s"rnrn%srn",
             $this->boundary,
             $name,
             $value
@@ -165,6 +165,6 @@ class RequestBodyMultipart implements RequestBodyInterface
      */
     protected function getFileHeaders(FacebookFile $file)
     {
-        return "\r\nContent-Type: {$file->getMimetype()}";
+        return "rnContent-Type: {$file->getMimetype()}";
     }
 }

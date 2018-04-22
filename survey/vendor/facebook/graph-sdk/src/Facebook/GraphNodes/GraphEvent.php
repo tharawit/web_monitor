@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace FacebookGraphNodes;
 
 /**
  * Class GraphEvent
@@ -34,10 +34,10 @@ class GraphEvent extends GraphNode
      * @var array Maps object key names to GraphNode types.
      */
     protected static $graphObjectMap = [
-        'cover' => '\Facebook\GraphNodes\GraphCoverPhoto',
-        'place' => '\Facebook\GraphNodes\GraphPage',
-        'picture' => '\Facebook\GraphNodes\GraphPicture',
-        'parent_group' => '\Facebook\GraphNodes\GraphGroup',
+        'cover' => 'FacebookGraphNodesGraphCoverPhoto',
+        'place' => 'FacebookGraphNodesGraphPage',
+        'picture' => 'FacebookGraphNodesGraphPicture',
+        'parent_group' => 'FacebookGraphNodesGraphGroup',
     ];
 
     /**
@@ -73,7 +73,7 @@ class GraphEvent extends GraphNode
     /**
      * Returns the `end_time` (End time, if one has been set) as DateTime if present.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getEndTime()
     {
@@ -143,7 +143,7 @@ class GraphEvent extends GraphNode
     /**
      * Returns the `start_time` (Start time) as DateTime if present.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getStartTime()
     {
@@ -173,7 +173,7 @@ class GraphEvent extends GraphNode
     /**
      * Returns the `updated_time` (Last update time) as DateTime if present.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getUpdatedTime()
     {

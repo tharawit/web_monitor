@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Listeners;
+namespace AppListeners;
 
-use App\Events\ExampleEvent;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use AppEventsExampleEvent;
+use IlluminateQueueInteractsWithQueue;
+use IlluminateContractsQueueShouldQueue;
 
 class ExampleListener
 {

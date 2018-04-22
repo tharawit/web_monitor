@@ -21,13 +21,13 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\Exceptions;
+namespace FacebookExceptions;
 
 /**
  * Class FacebookSDKException
  *
  * @package Facebook
  */
-class FacebookSDKException extends \Exception
+class FacebookSDKException extends Exception
 {
 }

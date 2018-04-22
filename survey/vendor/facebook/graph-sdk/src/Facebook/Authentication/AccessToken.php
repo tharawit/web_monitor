@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\Authentication;
+namespace FacebookAuthentication;
 
 /**
  * Class AccessToken
@@ -40,7 +40,7 @@ class AccessToken
     /**
      * Date when token expires.
      *
-     * @var \DateTime|null
+     * @var DateTime|null
      */
     protected $expiresAt;
 
@@ -73,7 +73,7 @@ class AccessToken
     /**
      * Getter for expiresAt.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getExpiresAt()
     {
@@ -115,7 +115,7 @@ class AccessToken
      */
     public function isExpired()
     {
-        if ($this->getExpiresAt() instanceof \DateTime) {
+        if ($this->getExpiresAt() instanceof DateTime) {
             return $this->getExpiresAt()->getTimestamp() < time();
         }
 
@@ -153,7 +153,7 @@ class AccessToken
      */
     protected function setExpiresAtFromTimeStamp($timeStamp)
     {
-        $dt = new \DateTime();
+        $dt = new DateTime();
         $dt->setTimestamp($timeStamp);
         $this->expiresAt = $dt;
     }

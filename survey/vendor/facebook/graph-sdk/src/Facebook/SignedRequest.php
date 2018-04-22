@@ -23,7 +23,7 @@
  */
 namespace Facebook;
 
-use Facebook\Exceptions\FacebookSDKException;
+use FacebookExceptionsFacebookSDKException;
 
 /**
  * Class SignedRequest
@@ -268,7 +268,7 @@ class SignedRequest
      */
     protected function validateSignature($hashedSig, $sig)
     {
-        if (\hash_equals($hashedSig, $sig)) {
+        if (hash_equals($hashedSig, $sig)) {
             return;
         }
 
@@ -319,7 +319,7 @@ class SignedRequest
      */
     protected function validateBase64($input)
     {
-        if (!preg_match('/^[a-zA-Z0-9\/\r\n+]*={0,2}$/', $input)) {
+        if (!preg_match('/^[a-zA-Z0-9/rn+]*={0,2}$/', $input)) {
             throw new FacebookSDKException('Signed request contains malformed base64 encoding.', 608);
         }
     }

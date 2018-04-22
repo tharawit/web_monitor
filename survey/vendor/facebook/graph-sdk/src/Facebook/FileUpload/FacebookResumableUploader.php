@@ -21,15 +21,15 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\FileUpload;
+namespace FacebookFileUpload;
 
-use Facebook\Authentication\AccessToken;
-use Facebook\Exceptions\FacebookResponseException;
-use Facebook\Exceptions\FacebookResumableUploadException;
-use Facebook\Exceptions\FacebookSDKException;
-use Facebook\FacebookApp;
-use Facebook\FacebookClient;
-use Facebook\FacebookRequest;
+use FacebookAuthenticationAccessToken;
+use FacebookExceptionsFacebookResponseException;
+use FacebookExceptionsFacebookResumableUploadException;
+use FacebookExceptionsFacebookSDKException;
+use FacebookFacebookApp;
+use FacebookFacebookClient;
+use FacebookFacebookRequest;
 
 /**
  * Class FacebookResumableUploader

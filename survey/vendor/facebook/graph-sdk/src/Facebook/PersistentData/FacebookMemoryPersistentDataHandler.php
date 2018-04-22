@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\PersistentData;
+namespace FacebookPersistentData;
 
 /**
  * Class FacebookMemoryPersistentDataHandler

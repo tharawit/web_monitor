@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace FacebookGraphNodes;
 
 /**
  * Class GraphAlbum
@@ -35,8 +35,8 @@ class GraphAlbum extends GraphNode
      * @var array Maps object key names to Graph object types.
      */
     protected static $graphObjectMap = [
-        'from' => '\Facebook\GraphNodes\GraphUser',
-        'place' => '\Facebook\GraphNodes\GraphPage',
+        'from' => 'FacebookGraphNodesGraphUser',
+        'place' => 'FacebookGraphNodesGraphPage',
     ];
 
     /**
@@ -82,7 +82,7 @@ class GraphAlbum extends GraphNode
     /**
      * Returns the time the album was initially created.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getCreatedTime()
     {
@@ -92,7 +92,7 @@ class GraphAlbum extends GraphNode
     /**
      * Returns the time the album was updated.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getUpdatedTime()
     {

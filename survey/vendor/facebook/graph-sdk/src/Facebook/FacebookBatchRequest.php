@@ -26,8 +26,8 @@ namespace Facebook;
 use ArrayIterator;
 use IteratorAggregate;
 use ArrayAccess;
-use Facebook\Authentication\AccessToken;
-use Facebook\Exceptions\FacebookSDKException;
+use FacebookAuthenticationAccessToken;
+use FacebookExceptionsFacebookSDKException;
 
 /**
  * Class BatchRequest
@@ -70,7 +70,7 @@ class FacebookBatchRequest extends FacebookRequest implements IteratorAggregate,
      *
      * @return FacebookBatchRequest
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function add($request, $options = null)
     {
@@ -83,7 +83,7 @@ class FacebookBatchRequest extends FacebookRequest implements IteratorAggregate,
         }
 
         if (!$request instanceof FacebookRequest) {
-            throw new \InvalidArgumentException('Argument for add() must be of type array or FacebookRequest.');
+            throw new InvalidArgumentException('Argument for add() must be of type array or FacebookRequest.');
         }
 
         if (null === $options) {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Providers;
+namespace AppProviders;
 
-use Illuminate\Support\ServiceProvider;
+use IlluminateSupportServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

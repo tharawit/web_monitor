@@ -36,7 +36,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Facebook\\": "src/Facebook/"
+                "Facebook": "src/Facebook/"
             },
             "files": [
                 "src/Facebook/polyfills.php"

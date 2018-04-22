@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace FacebookGraphNodes;
 
 /**
  * Class GraphSessionInfo
@@ -53,7 +53,7 @@ class GraphSessionInfo extends GraphNode
     /**
      * Returns the date & time that the token expires.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getExpiresAt()
     {
@@ -73,7 +73,7 @@ class GraphSessionInfo extends GraphNode
     /**
      * Returns the date & time the token was issued at.
      *
-     * @return \DateTime|null
+     * @return DateTime|null
      */
     public function getIssuedAt()
     {

@@ -21,7 +21,7 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace FacebookGraphNodes;
 
 /**
  * Class GraphUser
@@ -34,10 +34,10 @@ class GraphUser extends GraphNode
      * @var array Maps object key names to Graph object types.
      */
     protected static $graphObjectMap = [
-        'hometown' => '\Facebook\GraphNodes\GraphPage',
-        'location' => '\Facebook\GraphNodes\GraphPage',
-        'significant_other' => '\Facebook\GraphNodes\GraphUser',
-        'picture' => '\Facebook\GraphNodes\GraphPicture',
+        'hometown' => 'FacebookGraphNodesGraphPage',
+        'location' => 'FacebookGraphNodesGraphPage',
+        'significant_other' => 'FacebookGraphNodesGraphUser',
+        'picture' => 'FacebookGraphNodesGraphPicture',
     ];
 
     /**

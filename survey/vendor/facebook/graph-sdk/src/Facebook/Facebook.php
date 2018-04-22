@@ -23,25 +23,25 @@
  */
 namespace Facebook;
 
-use Facebook\Authentication\AccessToken;
-use Facebook\Authentication\OAuth2Client;
-use Facebook\FileUpload\FacebookFile;
-use Facebook\FileUpload\FacebookResumableUploader;
-use Facebook\FileUpload\FacebookTransferChunk;
-use Facebook\FileUpload\FacebookVideo;
-use Facebook\GraphNodes\GraphEdge;
-use Facebook\Url\UrlDetectionInterface;
-use Facebook\Url\FacebookUrlDetectionHandler;
-use Facebook\PseudoRandomString\PseudoRandomStringGeneratorFactory;
-use Facebook\PseudoRandomString\PseudoRandomStringGeneratorInterface;
-use Facebook\HttpClients\HttpClientsFactory;
-use Facebook\PersistentData\PersistentDataFactory;
-use Facebook\PersistentData\PersistentDataInterface;
-use Facebook\Helpers\FacebookCanvasHelper;
-use Facebook\Helpers\FacebookJavaScriptHelper;
-use Facebook\Helpers\FacebookPageTabHelper;
-use Facebook\Helpers\FacebookRedirectLoginHelper;
-use Facebook\Exceptions\FacebookSDKException;
+use FacebookAuthenticationAccessToken;
+use FacebookAuthenticationOAuth2Client;
+use FacebookFileUploadFacebookFile;
+use FacebookFileUploadFacebookResumableUploader;
+use FacebookFileUploadFacebookTransferChunk;
+use FacebookFileUploadFacebookVideo;
+use FacebookGraphNodesGraphEdge;
+use FacebookUrlUrlDetectionInterface;
+use FacebookUrlFacebookUrlDetectionHandler;
+use FacebookPseudoRandomStringPseudoRandomStringGeneratorFactory;
+use FacebookPseudoRandomStringPseudoRandomStringGeneratorInterface;
+use FacebookHttpClientsHttpClientsFactory;
+use FacebookPersistentDataPersistentDataFactory;
+use FacebookPersistentDataPersistentDataInterface;
+use FacebookHelpersFacebookCanvasHelper;
+use FacebookHelpersFacebookJavaScriptHelper;
+use FacebookHelpersFacebookPageTabHelper;
+use FacebookHelpersFacebookRedirectLoginHelper;
+use FacebookExceptionsFacebookSDKException;
 
 /**
  * Class Facebook
@@ -244,7 +244,7 @@ class Facebook
      *
      * @param AccessToken|string $accessToken The access token to save.
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function setDefaultAccessToken($accessToken)
     {
@@ -260,7 +260,7 @@ class Facebook
             return;
         }
 
-        throw new \InvalidArgumentException('The default access token must be of type "string" or Facebook\AccessToken');
+        throw new InvalidArgumentException('The default access token must be of type "string" or FacebookAccessToken');
     }
 
     /**
