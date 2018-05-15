@@ -64,7 +64,11 @@ $router->get('/simple', function () use ($router) {
 
 /* test fetch db */
 $router->get('/testdb', function () use ($router) {
-    $results = app('db')->select("SELECT * FROM user");
+    $results = app('db')->select("SELECT* FROM `survey_single`");
+    echo '<h1> Test DB </h1>';
+    var_dump($results);
+    echo "<hr/>";
+    $results = app('db')->select("SELECT* FROM `survey_overview`");
     echo '<h1> Test DB </h1>';
     var_dump($results);
 });

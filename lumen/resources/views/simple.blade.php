@@ -164,6 +164,7 @@
         </li>
         <li class="breadcrumb-item active">My Dashboard</li>
       </ol>
+      <!-- Menu Bar -->
       <!-- Icon Cards-->
       <div class="row">
         <!-- Card Icon -->
