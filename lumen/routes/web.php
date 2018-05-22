@@ -41,37 +41,65 @@ $router->get('/', function () use ($router) {
 /* route simple page */
 $router->get('/dashboard', function () use ($router) {
     /* fb login response */
-    $fb = new \Facebook\Facebook([
-        'app_id' => APPINFO[0]['id'],
-        'app_secret' => APPINFO[0]['secret'],
-        'default_graph_version' => APPINFO[0]['version'],
-    ]);
-    $helper = $fb->getRedirectLoginHelper();
-    $accessToken = $helper->getAccessToken();
-    $query_str ="me?fields=id,name,email";
-    $response = $fb->get($query_str, $accessToken);
-    $user_data = $response->getDecodedBody();
+    // $fb = new \Facebook\Facebook([
+    //     'app_id' => APPINFO[0]['id'],
+    //     'app_secret' => APPINFO[0]['secret'],
+    //     'default_graph_version' => APPINFO[0]['version'],
+    // ]);
+    // $helper = $fb->getRedirectLoginHelper();
+    // $accessToken = $helper->getAccessToken();
+    // $query_str ="me?fields=id,name,email";
+    // $response = $fb->get($query_str, $accessToken);
+    // $user_data = $response->getDecodedBody();
     /* data from bot survey */
-    $data_group_name = app('db')->select("SELECT DISTINCT `group_name` FROM `survey_overview` ORDER BY group_name ASC");
-    $data_group_name_list = [];
+    $data_group_list = [];
+    $group_name_list = [];
+    $raw_data_group = [];
+    $data_group_name = app('db')->select("SELECT DISTINCT `group_name` FROM `survey_overview` ORDER BY `group_name` ASC");
     for($i=0; $i < count($data_group_name); $i++){
-        foreach($data_group_name[$i] as $value){
-            array_push($data_group_name_list, $value);
+        foreach($data_group_name[$i] as $group_name){
+                $data_group_post = app('db')->select("SELECT * FROM `survey_overview` WHERE `group_name` LIKE '".$group_name."' ORDER BY `datetime` ASC");
+                array_push($group_name_list, $group_name);                
+                array_push($data_group_list, $data_group_post);
         }
     }
+    // print_r($data_group_list);
+    // print_r($group_name_list);
+    // print_r($data_group_list[0]);
+  
+    foreach($group_name_list as $group_name){
+        array_push($raw_data_group, 
+        [
+            'name' => $group_name,
+            'posts' => [],
+            'members' => [],
+            'datetime' => []
+        ]);   
+    }
+    foreach($group_name_list as $group_name){
+        foreach($raw_data_group as $data_group){
+            if($data_group['name'] == $group_name){
+                // echo key($data_group['name']);
+                // echo $group_name;
+            }else {
+                echo 0;
+            }
+        }
+    }
+    print_r($data_group_list);
     // best [....]
     // $data = app('db')->select("SELECT DISTINCT `group_name` FROM `survey_overview` ORDER BY datetime ASC");
     // $data = json_encode($data, JSON_UNESCAPED_UNICODE);
     // print_r($data_group_name_list);
-    $data = json_encode($data_group_name_list, JSON_UNESCAPED_UNICODE);
-    return view('dashboard',
-        [
-            'name' => $user_data['name'],
-            'pic' => 'https://graph.facebook.com/'.$user_data['id'].'/picture',
-            'email' => $user_data['email'],
-            'graph_data' => $data
-        ]
-    );
+    // $data_group_name_list_json = json_encode($data_group_name_list, JSON_UNESCAPED_UNICODE);
+    // return view('dashboard',
+    //     [
+    //         'name' => $user_data['name'],
+    //         'pic' => 'https://graph.facebook.com/'.$user_data['id'].'/picture',
+    //         'email' => $user_data['email'],
+    //         'graph_data' => $data
+    //     ]
+    // );
 });
 
 /* test fetch db */
