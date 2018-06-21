@@ -76,22 +76,26 @@ $router->get('/dashboard', function () use ($router) {
             'datetime' => []
         ]);   
     }
-    foreach($group_name_list as $group_name){
-        foreach($raw_data_group as $data_group){
-            if($data_group['name'] == $group_name){
-                // echo key($data_group['name']);
-                // echo $group_name;
-            }else {
-                echo 0;
-            }
-        }
-    }
+    // foreach($group_name_list as $group_name){
+    //     foreach($raw_data_group as $data_group){
+    //         if($data_group['name'] == $group_name){
+    //             // echo key($data_group['name']);
+    //             echo $group_name;
+    //         }else {
+    //             echo 0;
+    //         }
+    //     }
+    // }
+    // echo "<hr>";
     print_r($data_group_list);
+
+    
     // best [....]
     // $data = app('db')->select("SELECT DISTINCT `group_name` FROM `survey_overview` ORDER BY datetime ASC");
     // $data = json_encode($data, JSON_UNESCAPED_UNICODE);
     // print_r($data_group_name_list);
     // $data_group_name_list_json = json_encode($data_group_name_list, JSON_UNESCAPED_UNICODE);
+ 
     // return view('dashboard',
     //     [
     //         'name' => $user_data['name'],
