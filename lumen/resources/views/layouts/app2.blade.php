@@ -109,4 +109,5 @@
     <script src="vendor/sb-admin-datatables.min.js"></script>
     <!-- <script src="vendor/sb-admin-charts.min.js"></script> -->
     @yield('graph_controller')
+    <script src="helper/area-charts.js"></script>
 </html>

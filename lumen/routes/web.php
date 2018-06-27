@@ -32,41 +32,14 @@ $router->get('/dashboard', function () use ($router) {
 });
 
 /* test fetch db */
-$router->get('/lookup', function () use ($router) {
-    // $results = app('db')->select("SELECT* FROM `survey_single`");
-    // echo '<h1> Test DB </h1>';
-    // var_dump($results);
-    // echo "<hr/>";
-
-
-//     $l = [
-//         "ไทยรัฐ แจ้งข่าว-คลิป",
-//         "ข่าวด่วน...ปาก ต่อ ปาก",
-//         "ทันข่าว ทันโลก",
-//         "ข่าวจาก อาสากู้ภัย THAILAND",
-//         "ข่าวสด ทันเหตุการณ์"
-//     ];
-//     for($i = 1 ; $i < 5 ;$i++){
-//         foreach($l as $value){
-//             $group_name = $value;
-//             $total_post = rand(452,1600);
-// $total_member = rand(60000,600000);
-// $q = "INSERT INTO `survey_overview` (
-//     `group_name`,
-//     `total_post`,
-//     `total_member`,
-//     `datetime`
-// ) VALUES (
-//     \"".$group_name."\",
-//     \"".$total_post."\",
-//     \"".$total_member."\",
-//     \"".date("Y-$i-d h:i:s")."\"
-// );";
-// $r = app('db')->select($q);
-// echo ($r?"OKAY":"FAIL");  
-// echo "<br>";
-//         }
-//         echo "<hr>";
-//     }
-
+$router->get('/lookup/{name}', function ($name) use ($router) {
+    header("Content-type: charset=utf-8");
+    $group_name_selected = urldecode($name);
+    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_name` LIKE '$group_name_selected'");
+    $results = json_encode($results, JSON_UNESCAPED_UNICODE);
+    return view('lookup',
+        [
+            'posts' => $results
+        ]
+    );
 });
