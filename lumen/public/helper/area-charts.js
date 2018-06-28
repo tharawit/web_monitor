@@ -55,22 +55,22 @@ function fakeDataAreaChart(loopLimit){
 /* extract data area chart */
 function extractDataAreaChart(loopLimit, rawData){
     var result = [];
-    for (var i = 0; i < rawData.length; i++){
-        result = result.concat(
-            rawData[i].total_post
-        );
+    var month = 12;
+    for (var i = 0; i < month; i++){
+        if(i < rawData.length) result = result.concat(rawData[i].total_post);
+        else result = result.concat(0);
     }
     return result;
 }
-extractDataAreaChart(5, graph_data[0])
 
 /* extract data Bar && Pie Chart */
 function extractDataBarChart(loopLimit, rawData){
     var group_name = [];
     var group_member = [];
+    var group_limit = 5;
     for(var index = 0; index < loopLimit; index++){
         group_name = group_name.concat(rawData[index][0].group_name);
-        for (var i = 0; i < rawData[index].length; i++){
+        for (var i = rawData[index].length - 1; i > rawData[index].length - 2; i--){
             group_member = group_member.concat(rawData[index][i].total_member);
         }
     }
@@ -104,7 +104,7 @@ var ctx = document.getElementById("myAreaChart"),
                                 pointHitRadius: 20,
                                 pointBorderWidth: 2,
                                 // data: fakeDataAreaChart(12)
-                                data: extractDataAreaChart(5, graph_data[index])
+                                data: extractDataAreaChart(line_limit, graph_data[index])
                             }
                         )
                     }
@@ -118,17 +118,17 @@ var ctx = document.getElementById("myAreaChart"),
                         unit: "date"
                     },
                     gridLines: {
-                        display: !1
+                        display: 1
                     },
                     ticks: {
-                        maxTicksLimit: 7
+                        maxTicksLimit: 5
                     }
                 }],
                 // แก้เลข
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 3e3,
+                        max: 2e3,
                         maxTicksLimit: 5
                     },
                     gridLines: {
@@ -150,11 +150,11 @@ var ctx = document.getElementById("myAreaChart"),
             {
                 label: "Revenue",
                 backgroundColor: [
-                    graph_set_color[0].borderColor,
-                    graph_set_color[1].borderColor,
-                    graph_set_color[2].borderColor,
-                    graph_set_color[3].borderColor,
-                    graph_set_color[4].borderColor
+                    "rgba(232,32,80,0.6)",
+                    "rgba(94,70,242,0.6)",
+                    "rgba(70,242,118,0.6)",
+                    "rgba(250,229,42,0.6)",
+                    "rgba(225,116,237,0.6)"
                 ],
                 borderColor:[
                     graph_set_color[0].borderColor,
@@ -177,39 +177,51 @@ var ctx = document.getElementById("myAreaChart"),
                         display: !1
                     },
                     ticks: {
-                        maxTicksLimit: 6
+                        maxTicksLimit: 5
                     }
                 }],
                 yAxes: [{
                     ticks: {
                         min: 0,
                         max: 60e4,
-                        maxTicksLimit: 5
+                        maxTicksLimit: 10
                     },
                     gridLines: {
-                        display: !0
+                        display: 1
                     }
                 }]
             },
             legend: {
-                display: !1
+                display: 0
             }
         }
     }),
     ctx = document.getElementById("myPieChart"),
     myPieChart = new Chart(ctx, {
-        type: "pie",
+        type: "doughnut",
         data: {
             labels: barChartInfo[0],
             datasets: [{
                 data: barChartInfo[1],
                 backgroundColor: [
-                    graph_set_color[0].borderColor,
-                    graph_set_color[1].borderColor,
-                    graph_set_color[2].borderColor,
-                    graph_set_color[3].borderColor,
-                    graph_set_color[4].borderColor
+                    "rgba(232,32,80,0.6)",
+                    "rgba(94,70,242,0.6)",
+                    "rgba(70,242,118,0.6)",
+                    "rgba(250,229,42,0.6)",
+                    "rgba(225,116,237,0.6)"
                 ]
+            }]
+        },
+        options: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    max: 60e4,
+                    maxTicksLimit: 5
+                },
+                gridLines: {
+                    display: 1
+                }
             }]
         }
     });
