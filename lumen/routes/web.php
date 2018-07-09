@@ -13,8 +13,13 @@ define('APPINFO', array(
 /* route home page */
 $router->get('/', function () use ($router) {
     require_once("../helper/home_fb_login.php");
+    if($user_data <> null){
+        $_SESSION['account'] = true;
+    }
 });
 
+
+if($_SESSION['account']){
 /* route dashboard page */
 $router->get('/dashboard', function () use ($router) {
     /* fb login load user info*/
@@ -43,3 +48,9 @@ $router->get('/lookup/{name}', function ($name) use ($router) {
         ]
     );
 });
+
+}else{
+    $router->get('/error', function() use ($router){
+        return "<center><h1>Error Page please Login with Facebook</h1></center>";
+    });
+}
