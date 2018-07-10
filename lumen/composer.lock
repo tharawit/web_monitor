@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2afe79954681fa46ff159267bcd8c5d",
+    "content-hash": "e17b45d7e84549bac8564dca96cab3b4",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -991,7 +991,7 @@
         },
         {
             "name": "illuminate/session",
-            "version": "v5.6.9",
+            "version": "v5.6.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/session.git",

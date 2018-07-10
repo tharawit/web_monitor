@@ -12,45 +12,58 @@ define('APPINFO', array(
 
 /* route home page */
 $router->get('/', function () use ($router) {
-    require_once("../helper/home_fb_login.php");
-    if($user_data <> null){
-        $_SESSION['account'] = true;
+    if(empty(app('session')->has('fb_authen'))){
+        require_once("../helper/home_fb_login.php");
+    }else{
+        return redirect('/dashboard');
     }
 });
 
+/* resive fb login callback for difine session */
+$router->get('/fb-callback', function () use ($router) {
+    if(empty(app('session')->has('fb_authen'))){
+        /* resive fb login callback */
+        require_once("../helper/dashboard_fb_load_info.php");
+        /* authen fb acount by email */
+        require_once("../helper/check_user_session.php");
+        /* create sessin for fb info */
+        app('session')->put('fb_authen', check_user_session($user_data['email']));
+        app('session')->put('fb_id', $user_data['id']);
+        app('session')->put('fb_name', $user_data['name']);
+        app('session')->put('fb_email', $user_data['email']);
+        // echo app('session')->get('fb_id');
+        dd(app('session')->all());
+        // return redirect('/dashboard');
+    }else{
+        return redirect('/dashboard');
 
-if($_SESSION['account']){
+    }
+});
+
+/* logout */
+$router->get('/logout', function () use ($router) {
+    if(!empty(app('session')->has('fb_authen'))){
+        app('session')->remove('fb_authen');
+        app('session')->remove('fb_id');
+        app('session')->remove('fb_name');
+        app('session')->remove('fb_email');
+        return redirect('/');
+    }else{
+        return redirect('/');
+    }
+});
+
 /* route dashboard page */
 $router->get('/dashboard', function () use ($router) {
-    /* fb login load user info*/
-    require_once("../helper/dashboard_fb_load_info.php");
-    /* get data from database */
-    require_once("../helper/dashboard_getdata.php");
-    return view('dashboard',
-        [
-            'name' => $user_data['name'],
-            'pic' => 'https://graph.facebook.com/'.$user_data['id'].'/picture',
-            'email' => $user_data['email'],
-            'graph_data' => $data
-        ]
-    );
-});
+    if(app('session')->has('fb_authen')){
+        dd(app('session')->all());
+        // return redirect('/');
+    }else{
+        echo "RUN DASHBOARD OKAY";
+        dd(app('session')->all());
 
-/* test fetch db */
-$router->get('/lookup/{name}', function ($name) use ($router) {
-    header("Content-type: charset=utf-8");
-    $group_name_selected = urldecode($name);
-    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_name` LIKE '$group_name_selected'");
-    $results = json_encode($results, JSON_UNESCAPED_UNICODE);
-    return view('lookup',
-        [
-            'posts' => $results
-        ]
-    );
+    }
 });
-
-}else{
-    $router->get('/error', function() use ($router){
-        return "<center><h1>Error Page please Login with Facebook</h1></center>";
-    });
-}
+$router->get('/ss', function () use ($router) {
+    dd(app('session')->all());
+});

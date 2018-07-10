@@ -59,14 +59,24 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//    App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+   App\Http\Middleware\ExampleMiddleware::class
+]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
+/* Middleware Session */
+$app->middleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+]);
+
+$app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+    return new \Illuminate\Session\SessionManager($app);
+});
+
+$app->configure('session');
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -77,7 +87,8 @@ $app->singleton(
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
+/* Middleware Session */
+$app->register(\Illuminate\Session\SessionServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);

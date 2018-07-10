@@ -6,7 +6,7 @@ $fb = new \Facebook\Facebook([
 ]);
 $helper = $fb->getRedirectLoginHelper();
   $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('http://localhost:8000/dashboard', $permissions);
+$loginUrl = $helper->getLoginUrl('http://localhost:8000/fb-callback', $permissions);
 echo "
         <style>
             .loginBtn{
