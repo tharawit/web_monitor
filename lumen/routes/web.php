@@ -32,7 +32,8 @@ $router->get('/fb-callback', function () use ($router) {
         app('session')->put('fb_name', $user_data['name']);
         app('session')->put('fb_email', $user_data['email']);
         // echo app('session')->get('fb_id');
-        dd(app('session')->all());
+        print_r(app('session')->all());
+        echo "<hr><a href=\"http://localhost:8000/ss\">Test</a>";
         // return redirect('/dashboard');
     }else{
         return redirect('/dashboard');
@@ -64,6 +65,60 @@ $router->get('/dashboard', function () use ($router) {
 
     }
 });
+
 $router->get('/ss', function () use ($router) {
-    dd(app('session')->all());
+    app('session')->put('test', 'best');
+    print_r(app('session')->all());
+    echo storage_path();
 });
+
+
+
+
+/* route dashboard page */
+// $router->get('/dashboard', function () use ($router) {
+    // if(empty($_SESSION['fb_login']) || $_SESSION['fb_login'] == false){
+        /* fb login load user info*/
+        
+       
+ 
+        // if($_SESSION['fb_login']){
+        //     $_SESSION['fb_email'] = $user_data['email'];
+        //     $_SESSION['fb_id'] = $user_data['id'];
+        //     $_SESSION['fb_name'] = $user_data['name'];
+        // }else{
+        //     // redirect("/");
+        //     echo 0;
+        // }
+    // }
+    /* get data from database */
+    // require_once("../helper/dashboard_getdata.php");
+    // return view('dashboard',
+    //     [
+    //         'name' => $_SESSION['fb_name'],
+    //         'pic' => 'https://graph.facebook.com/'.$_SESSION['fb_id'].'/picture',
+    //         'email' => $_SESSION['fb_email'],
+    //         'graph_data' => $data
+    //     ]
+    // );
+
+
+/* test fetch db */
+// $router->get('/lookup/{name}', function ($name) use ($router) {
+//     header("Content-type: charset=utf-8");
+//     $group_name_selected = urldecode($name);
+//     $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_name` LIKE '$group_name_selected'");
+//     $results = json_encode($results, JSON_UNESCAPED_UNICODE);
+//     return view('lookup',
+//         [
+//             'posts' => $results
+//         ]
+//     );
+// });
+
+
+
+    // $router->get('/error', function() use ($router){
+    //     return "<center><h1>Error Page please Login with Facebook</h1></center>";
+    // });
+
