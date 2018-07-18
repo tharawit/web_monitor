@@ -9,6 +9,15 @@ $helper = $fb->getRedirectLoginHelper();
 $loginUrl = $helper->getLoginUrl('http://localhost:8000/fb-callback', $permissions);
 echo "
         <style>
+            body{
+                background:#343a40;
+            }
+            .loginDivBox{
+                margin:auto;
+                margin-top:5%;
+                width:300px;
+                height:500px;
+            }
             .loginBtn{
                 box-sizing:border-box;
                 position:relative;
@@ -59,6 +68,9 @@ echo "
                 background:#E74B37;
             }
         </style>
+        <div class=\"loginDivBox\">
         <a href='". htmlspecialchars($loginUrl) ."'>
             <button class='loginBtn loginBtn--facebook'>Login with Facebook</button>
-        </a>";
+        </a>
+        </div>
+        ";

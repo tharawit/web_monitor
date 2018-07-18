@@ -1,1 +1,9 @@
 .DS_Store
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+/vendor/
+session.vim
+=======
+>>>>>>> staging
+>>>>>>> dev

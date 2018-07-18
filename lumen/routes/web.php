@@ -1,7 +1,6 @@
 <?php
 /* define session */
 session_start();
-header("Content-type: charset=utf-8");
 // fb api login
 require '../vendor/autoload.php'; // change path as needed
 define('APPINFO', array(
@@ -71,13 +70,10 @@ $router->get('/dashboard', function () use ($router) {
     }
 });
 
-$router->get('/ss', function () use ($router) {
-    // echo '<hr>'.$_SESSION['name'];
-});
-
-/* fetch db */
+/* lookup fetch db */
 $router->get('/lookup/{name}', function ($name) use ($router) {
     if($_SESSION['fb_authen']){
+    header("Content-type: charset=utf-8");
     $group_name_selected = urldecode($name);
     $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_name` LIKE '$group_name_selected'");
     $results = json_encode($results, JSON_UNESCAPED_UNICODE);
