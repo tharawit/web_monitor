@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <html>
     <head>
         <title>@yield('title')</title>
@@ -30,19 +29,19 @@
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Profile">
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="/profile">
                             <i class="fa fa-fw fa-user"></i>
                             <span class="nav-link-text">Profile</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Survey">
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="/survey">
                             <i class="fa fa-fw fa-eye"></i>
                             <span class="nav-link-text">Survey</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Setting">
-                        <a class="nav-link" href="#setting">
+                        <a class="nav-link" href="/setting">
                             <i class="fa fa-fw fa-gears"></i>
                             <span class="nav-link-text">Setting</span>
                         </a>
@@ -77,7 +76,7 @@
                         </form> -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/">          
+                        <a class="nav-link" href="/logout">          
                             <i class="fa fa-fw fa-sign-out"></i>
                             <span class="nav-link-text">Logout</span>
                         </a>
