@@ -1,3 +1,6 @@
 .DS_Store
+<<<<<<< HEAD
 /vendor/
 session.vim
+=======
+>>>>>>> staging

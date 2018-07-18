@@ -110,4 +110,9 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+/* debug bar */
+if (env('APP_DEBUG')) {
+    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+}
+
 return $app;
