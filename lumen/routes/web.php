@@ -32,7 +32,18 @@ $router->get('/fb-callback', function () use ($router) {
         $_SESSION['fb_id'] = $user_data['id'];
         $_SESSION['fb_name'] = $user_data['name'];
         $_SESSION['fb_email'] = $user_data['email'];
-        return redirect('/dashboard');
+        /* check user */
+        require_once('../helper/config_check_admin.php');
+        /* check is user info had in database */
+        check_user_regis($user_data['name'], $user_data['email']);
+        /* defin user status */
+        $checked_result = check_user_status($user_data['name'], $user_data['email']);
+        $_SESSION['fb_session'] = $checked_result;
+        if($checked_result == "baned"){
+            return redirect('/logout');
+        }else{
+            return redirect('/dashboard');
+        }
     }else{
         return redirect('/');
 
