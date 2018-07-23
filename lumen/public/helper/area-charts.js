@@ -121,7 +121,7 @@ var ctx = document.getElementById("myAreaChart"),
                         display: 1
                     },
                     ticks: {
-                        maxTicksLimit: 5
+                        maxTicksLimit: 12
                     }
                 }],
                 // แก้เลข
