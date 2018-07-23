@@ -20,9 +20,8 @@ foreach($group_name_list as $group_name){
         'datetime' => []
     ]);   
 }
-// best [....]
-// $data = app('db')->select("SELECT DISTINCT `group_name` FROM `survey_overview` ORDER BY datetime ASC");
-// $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-// print_r($data_group_name_list);
-// $data_group_name_list_json = json_encode($data_group_name_list, JSON_UNESCAPED_UNICODE);
+/* get current data */
+$current_data = app('db')->select("SELECT DISTINCT `detail`, `datetime`, `perma_link` FROM `survey_single` ORDER BY datetime DESC LIMIT 0, 6");
+
 $data = json_encode($data_group_list, JSON_UNESCAPED_UNICODE);
+$current_data = json_encode($current_data, JSON_UNESCAPED_UNICODE);

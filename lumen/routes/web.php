@@ -73,7 +73,8 @@ $router->get('/dashboard', function () use ($router) {
                 'name' => $_SESSION['fb_name'],
                 'pic' => 'https://graph.facebook.com/'.$_SESSION['fb_id'].'/picture',
                 'email' => $_SESSION['fb_email'],
-                'graph_data' => $data
+                'graph_data' => $data,
+                'current_data' => $current_data
             ]
         );
     }else{
