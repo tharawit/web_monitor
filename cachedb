@@ -7,7 +7,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `survey_single` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    `id` int(90000) unsigned NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`id`),
     `group_id` varchar(100) NOT NULL,
     `group_name` varchar(100) NOT NULL,
@@ -22,11 +22,20 @@ CREATE TABLE `survey_single` (
 CREATE TABLE `survey_overview` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`id`),
+    `group_id` varchar(100) NOT NULL,
     `group_name` varchar(200) NOT NULL,    
     `total_post` varchar(100) NOT NULL,
     `total_member` varchar(100) NOT NULL,    
     `datetime` datetime NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `survey_monitor` (
+    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`id`),
+    `survey_single_id` int(90000) NOT NULL,
+    `email` varchar(50) NOT NULL,
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
 ----------------------------------------------------------[คำสั่ง]
 เรียกดู
 SELECT* FROM `survey_single`
