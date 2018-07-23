@@ -7,6 +7,24 @@ include('./formatter_config.php');
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<script>
+    var view = 0
+    function viewTop(){
+        if(view == 0){
+            window.scroll({
+            top: 1000,
+            behavior: "smooth"
+        });
+        view = 1
+        }else{
+            window.scroll({
+            top: 0,
+            behavior: "smooth"
+        });
+        view = 0
+        }
+    }
+</script>
 </head>
 <body>
 <!-- --------- -->
@@ -22,14 +40,21 @@ include('./formatter_config.php');
     unset($_SESSION['genD_status']);
 ?>
 <!-- --------- -->
-<div style="float:right;margin-right:5px;width:100px;">
+<div style="float:right;margin-top:5px;margin-right:5px;width:100px;">
 <form action="genD.php" method="post">
     <input type="hidden" name="auth" value="auth_remove">
     <button style="width:100%;" type="submit" class="btn btn-danger">Logout</button>
 </form>
 </div>
 
-<div class="container">
+<div style="z-index:2; position:fixed;float:left ; margin-top:200px;margin-left:5px;width:50px;opacity:0.8;">
+    <button style="width:100%;" onclick="viewTop()" class="btn btn-info">
+    <svg aria-hidden="true" data-prefix="fas" data-icon="arrows-alt-v" class="svg-inline--fa fa-arrows-alt-v fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M214.059 377.941H168V134.059h46.059c21.382 0 32.09-25.851 16.971-40.971L144.971 7.029c-9.373-9.373-24.568-9.373-33.941 0L24.971 93.088c-15.119 15.119-4.411 40.971 16.971 40.971H88v243.882H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.568 9.373 33.941 0l86.059-86.059c15.12-15.119 4.412-40.971-16.97-40.971z"></path></svg>
+    </button>
+</div>
+
+<br>
+<div class="container" id="inputSet">
 <h3>Survey Overview</h3>
 <form action="genD.php" method="post">
 <input type="hidden" name="chanel" value="1">
@@ -112,9 +137,27 @@ include('./formatter_config.php');
     <button type="submit" class="btn btn-danger" onclick="confirm('Are you sure to clear all data in this table ?')"> Clear All</button>
     </form>
 </div>
-
-
 </div>
+<!-- View all data -->
+<div id="viewTable">
+<h3> Show all data </h3>
+    <form action="genD.php" method="post">
+        <input type="hidden" name="chanel" value="7">
+        <input type="hidden" name="view" value="view">
+        <select class="custom-select" name="table" style="width:300px;">
+        <?php 
+            FormatterConnect::Open();
+            $table_manger_show_table = FormatterConnect::Query('SHOW TABLES', true);
+            FormatterConnect::Close();
+            foreach($table_manger_show_table as $table){
+                echo "<option value=\"".$table['Tables_in_db']."\">".$table['Tables_in_db']."</option>";
+            } 
+        ?>
+        </select>
+        <button type="submit" class="btn btn-info">Show All Data</button>
+    </form>
+</div>
+<!-- END View all data -->
 </body>
 </html>
 <?php 
@@ -288,7 +331,7 @@ case 5:
             `engagement` varchar(200) NOT NULL,
             `shared` varchar(200) NOT NULL,
             `perma_link` varchar(200) NOT NULL,
-            `detail` varchar(800) NOT NULL,    
+            `detail` text(2000) NOT NULL,    
             `datetime` datetime NOT NULL
         ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
     ",
@@ -332,16 +375,44 @@ case 6:
     header('location: ./genD.php');
 break;
 
+case 7:
+    $table = $_POST['table'];
+    $sql_str1 = "SHOW COLUMNS FROM `".$table."`";
+    $sql_str2 = "SELECT * FROM `".$table."`";
+    FormatterConnect::Open();
+    $result_column = FormatterConnect::Query($sql_str1, true);
+    $result_value = FormatterConnect::Query($sql_str2, true);
+    FormatterConnect::Close();
+    echo "<hr><h3>".$table."</h3></hr>";
+    echo "<table class=\"table table-striped table-bordered table-hover\">";
+    echo "<tr>";
+    foreach($result_column as $col){
+        echo "<td>".$col['Field']."</td>";
+    }
+    echo "</tr>";
+    foreach($result_value as $value_row){
+        echo "<tr>";
+        foreach($value_row as $value_col){
+            echo "<td>".$value_col."</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
+    header('location: ./genD.php');
+    break;
 } //end switch
+
 }else{
     if($_POST['auth'] == 'auth' && $_POST['passwd'] == "reborn"){
         $_SESSION['authen_D'] = true;
         header('location: ./genD.php');
     }
 }
+
 if($_POST['auth'] == 'auth_remove'){
     $_SESSION['authen_D'] = false;
     unset($_SESSION['authen_D']);
-    header('location: ./genD.php');
+    session_destroy();
+    header('location: ./genD.php');   
 }
 ?>
