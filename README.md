@@ -10,3 +10,7 @@ fix composer autoload dependency
 ```
 composer update --no-scripts  
 ```
+start up / reset container
+```
+docker-compose -f docker/docker-compose.yml up --build --force-recreate
+```
