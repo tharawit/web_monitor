@@ -41,7 +41,7 @@ include('./formatter_config.php');
 ?>
 <!-- --------- -->
 <div style="float:right;margin-top:5px;margin-right:5px;width:100px;">
-<form action="genD.php" method="post">
+<form action="index.php" method="post">
     <input type="hidden" name="auth" value="auth_remove">
     <button style="width:100%;" type="submit" class="btn btn-danger">Logout</button>
 </form>
@@ -56,7 +56,7 @@ include('./formatter_config.php');
 <br>
 <div class="container" id="inputSet">
 <h3>Survey Overview</h3>
-<form action="genD.php" method="post">
+<form action="index.php" method="post">
 <input type="hidden" name="chanel" value="1">
 <input name="groupname" type="text" placeholder="Group Name" class="form-control">
 <input name="groupid" type="number" placeholder="Group ID ( 0000000000 )" class="form-control">
@@ -68,7 +68,7 @@ include('./formatter_config.php');
 <button type="submit" class="btn btn-primary"> Add Overview  Survey</button>
 </form>
 
-<form action="genD.php" method="post">
+<form action="index.php" method="post">
 <hr>
 <h3>Survey Single ( Post info )</h3>
 <input type="hidden" name="chanel" value="2">
@@ -86,7 +86,7 @@ include('./formatter_config.php');
 <button type="submit" class="btn btn-info"> Add Group in Single Survey</button>
 </form>
 
-<form action="genD.php" method="post">
+<form action="index.php" method="post">
     <hr>
     <h3>User</h3>
     <input type="hidden" name="chanel" value="3">
@@ -102,7 +102,7 @@ include('./formatter_config.php');
     <button type="submit" class="btn btn-primary"> Create User</button>
 </form>
 
-<form action="genD.php" method="post">
+<form action="index.php" method="post">
     <hr>
     <h3>Survey Group</h3>
     <input type="hidden" name="chanel" value="4">
@@ -116,13 +116,13 @@ include('./formatter_config.php');
 <div>
     <hr>
     <h3>Table Manager </h3>
-    <form action="genD.php" method="post">
+    <form action="index.php" method="post">
     <input type="hidden" name="chanel" value="5">
     <input type="hidden" name="gentable" value="1">
     <button type="submit" class="btn btn-warning" onclick="confirm('Are you sure to reset all tables ?')"> Reset Table</button>
     </form>
 
-    <form action="genD.php" method="post">
+    <form action="index.php" method="post">
     <input type="hidden" name="chanel" value="6">
     <select class="custom-select" name="table" style="width:300px;">
     <?php 
@@ -139,9 +139,10 @@ include('./formatter_config.php');
 </div>
 </div>
 <!-- View all data -->
-<div id="viewTable">
+<br><hr><br>
+<div class="container" id="viewTable">
 <h3> Show all data </h3>
-    <form action="genD.php" method="post">
+    <form action="index.php" method="post">
         <input type="hidden" name="chanel" value="7">
         <input type="hidden" name="view" value="view">
         <select class="custom-select" name="table" style="width:300px;">
@@ -172,7 +173,7 @@ include('./formatter_config.php');
         <div class="col-lg-3 col-xs-12"></div>
         <div class="col-lg-7 col-xs-12">
         <h3>Webmonitor Manager</h3>
-        <form action="genD.php" method="post">
+        <form action="index.php" method="post">
             <input type="hidden" name="auth" value="auth">
             <input style="width:100%;" name="passwd" type="text" placeholder="Passwords" class="form-control">
             <br>
@@ -218,7 +219,7 @@ $sql_str = "INSERT INTO `survey_overview` (
 easyInsert($sql_str );
 
 $_SESSION['genD_status'] = 'noti';
-header('location: ./genD.php');
+header('location: ./index.php');
 break;
 
  /**/
@@ -253,7 +254,7 @@ $sql_str = "INSERT INTO `survey_single` (
 ";
 easyInsert($sql_str );
 $_SESSION['genD_status'] = 'noti';
-header('location: ./genD.php');
+header('location: ./index.php');
 break;
 
  /* user */
@@ -273,7 +274,7 @@ $sql_str = "INSERT INTO `user` (
 ";
 easyInsert($sql_str );
 $_SESSION['genD_status'] = 'noti';
-header('location: ./genD.php');
+header('location: ./index.php');
 break;
 
  /* survey group */
@@ -293,7 +294,7 @@ $sql_str = "INSERT INTO `group` (
 ";
 easyInsert($sql_str );
 $_SESSION['genD_status'] = 'noti';
-header('location: ./genD.php');
+header('location: ./index.php');
 break;
 
  /* reset table */
@@ -361,7 +362,7 @@ case 5:
     }
     FormatterConnect::Close();
     $_SESSION['genD_status'] = 'noti';
-    header('location: ./genD.php');
+    header('location: ./index.php');
 break;
  
 /* clear data table*/
@@ -372,7 +373,7 @@ case 6:
     FormatterConnect::Query($sql_str, false);
     FormatterConnect::Close();
     $_SESSION['genD_status'] = 'noti';
-    header('location: ./genD.php');
+    header('location: ./index.php');
 break;
 
 case 7:
@@ -383,7 +384,7 @@ case 7:
     $result_column = FormatterConnect::Query($sql_str1, true);
     $result_value = FormatterConnect::Query($sql_str2, true);
     FormatterConnect::Close();
-    echo "<hr><h3>".$table."</h3></hr>";
+    echo "<hr>&emsp;<h3>SELECT TABLE : <span style=\"color:#0099ff;\">".$table."</span></h3></hr>";
     echo "<table class=\"table table-striped table-bordered table-hover\">";
     echo "<tr>";
     foreach($result_column as $col){
@@ -398,14 +399,14 @@ case 7:
         echo "</tr>";
     }
     echo "</table>";
-    header('location: ./genD.php');
+    header('location: ./index.php');
     break;
 } //end switch
 
 }else{
     if($_POST['auth'] == 'auth' && $_POST['passwd'] == "reborn"){
         $_SESSION['authen_D'] = true;
-        header('location: ./genD.php');
+        header('location: ./index.php');
     }
 }
 
@@ -413,6 +414,6 @@ if($_POST['auth'] == 'auth_remove'){
     $_SESSION['authen_D'] = false;
     unset($_SESSION['authen_D']);
     session_destroy();
-    header('location: ./genD.php');   
+    header('location: ./index.php');   
 }
 ?>

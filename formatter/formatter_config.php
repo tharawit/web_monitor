@@ -2,7 +2,7 @@
 class FormatterConnect{
 
     private static $CONFIG_DB = [
-        'host' => '127.0.0.1',
+        'host' => 'database',
         'port' => '3306',
         'db' => 'db',
         'username' => 'root',
@@ -12,7 +12,8 @@ class FormatterConnect{
     private static $con_state;
 
     public static function Open(){
-        self::$con_state = new PDO('mysql:host='.self::$CONFIG_DB['host'].';dbname='.self::$CONFIG_DB['db'], self::$CONFIG_DB['username'], self::$CONFIG_DB['password']);
+        #self::$con_state = new PDO('mysql:host='.self::$CONFIG_DB['host'].';dbname='.self::$CONFIG_DB['db'], self::$CONFIG_DB['username'], self::$CONFIG_DB['password']);
+        self::$con_state = new PDO('mysql:host=database;dbname='.self::$CONFIG_DB['db'], self::$CONFIG_DB['username'], self::$CONFIG_DB['password']);
     }
     
     public static function Status(){
