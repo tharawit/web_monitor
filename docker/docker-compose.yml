@@ -24,3 +24,16 @@ services:
             - database
         links:
             - database
+    web-lumen:
+        build: php-fpm
+        ports:
+            - "8000:8000"
+        working_dir: /www
+        volumes:
+            - ./../lumen:/www
+        command: cat .env.example | grep DB > .env
+        command: php -S 0.0.0.0:8000 -t /www/public
+        depends_on:
+            - database
+        links:
+            - database
