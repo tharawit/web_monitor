@@ -1,0 +1,39 @@
+version: "3"
+services:
+    database:
+        image: mysql:8.0.11
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./var/mysql:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=db
+            - MYSQL_USER=dbuser
+            - MYSQL_PASSWORD=1234
+            - MYSQL_ROOT_PASSWORD=1234
+    web-formatter:
+        #image: php:7.2-fpm
+        build: docker/php-fpm
+        ports:
+            - "9000:9000"
+        working_dir: /www
+        volumes:
+            - ./formatter:/www
+        command: php -S 0.0.0.0:9000 -t /www
+        depends_on:
+            - database
+        links:
+            - database
+    web-lumen:
+        build: docker/php-fpm
+        ports:
+            - "8000:8000"
+        working_dir: /www
+        volumes:
+            - ./lumen:/www
+        command: cat .env.example | grep DB > .env
+        command: php -S 0.0.0.0:8000 -t /www/public
+        depends_on:
+            - database
+        links:
+            - database

@@ -42,16 +42,61 @@ graph_set_color = [
         pointHoverBackgroundColor: "rgba(225,116,237)",
     }
 ];
-//fake data 
-function fakeDataAreaChart(loopLimit){
-    var result = [];
-    for (var i = 0; i < loopLimit; i++){
-        result = result.concat(
-            Math.floor((Math.random() * 4000) + 1)
-        );
+
+// console.log(graph_data)
+/* count group limit */
+function group_name(rawData){
+    var result = []
+    for(var index in rawData){
+        result.push(rawData[index][0].group_name)
     }
-    return result;
+    return result
 }
+/* count group max post , member */
+function group_max(rawData){
+    var result = {
+        'post': 0,
+        'member': 0
+    }
+    var cache_post_all = []
+    var cache_member_all = []
+    for(var index1 in rawData){
+        var cache_post = []
+        var cache_member = []
+        for(var index2 in rawData[index1]){
+            cache_post.push(parseInt(rawData[index1][index2].total_post))
+            cache_member.push(parseInt(rawData[index1][index2].total_member))
+        }
+        cache_post_all.push(Math.max.apply(Math, cache_post))
+        cache_member_all.push(Math.max.apply(Math, cache_member))
+    }
+    result.post = Math.max.apply(Math, cache_post_all)
+    result.member = Math.max.apply(Math, cache_member_all)
+    return result
+}
+/* round up number */
+function round_up(number){
+    number = number.toString()
+    var str = {head: '', tail: ''}
+    str.head = number[0]
+    str.tail = number.slice(1,number.length)
+    var cache_str_tail = ""
+    for(index in str.tail){
+        cache_str_tail = cache_str_tail + '0'
+    }
+    str.tail = cache_str_tail
+    return parseInt(str.head + str.tail)
+}
+
+/* define config graph */
+var roundup_num = {post: round_up(group_max(graph_data).post), member: round_up(group_max(graph_data).member)}
+
+var group_name_list = group_name(graph_data)
+var group_count_limit = group_name_list.length
+// balance graph
+var group_count_hightest_post = roundup_num.post + parseInt('1' + roundup_num.post.toString().slice(1, roundup_num.post.toString().length))
+var group_count_hightest_member = roundup_num.member + parseInt('1' + roundup_num.member.toString().slice(1, roundup_num.member.toString().length))
+
 /* extract data area chart */
 function extractDataAreaChart(loopLimit, rawData){
     var result = [];
@@ -67,7 +112,6 @@ function extractDataAreaChart(loopLimit, rawData){
 function extractDataBarChart(loopLimit, rawData){
     var group_name = [];
     var group_member = [];
-    var group_limit = 5;
     for(var index = 0; index < loopLimit; index++){
         group_name = group_name.concat(rawData[index][0].group_name);
         for (var i = rawData[index].length - 1; i > rawData[index].length - 2; i--){
@@ -76,7 +120,7 @@ function extractDataBarChart(loopLimit, rawData){
     }
     return [group_name, group_member];
 }
-var barChartInfo = extractDataBarChart(5, graph_data);
+var barChartInfo = extractDataBarChart(group_count_limit, graph_data);
 
 // area chart
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif', Chart.defaults.global.defaultFontColor = "#292b2c";
@@ -88,7 +132,7 @@ var ctx = document.getElementById("myAreaChart"),
             // generate line detail
             datasets: function (){
                     var line_detail = [];
-                    var line_limit = 5; // graph line limit config here !!!
+                    var line_limit = group_count_limit;  // graph line limit config here !!!
                     for (var index = 0; index < line_limit; index++){
                         line_detail = line_detail.concat(
                             {
@@ -124,11 +168,10 @@ var ctx = document.getElementById("myAreaChart"),
                         maxTicksLimit: 12
                     }
                 }],
-                // แก้เลข
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 2e3,
+                        max: group_count_hightest_post,
                         maxTicksLimit: 5
                     },
                     gridLines: {
@@ -183,7 +226,7 @@ var ctx = document.getElementById("myAreaChart"),
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 60e4,
+                        max: group_count_hightest_member,
                         maxTicksLimit: 10
                     },
                     gridLines: {
@@ -227,13 +270,11 @@ var ctx = document.getElementById("myAreaChart"),
     });
 
 // menu testing
-function genMenu(){
+/* function genMenu(){
     var menuStr = "";
     for(var i = 0; i < barChartInfo[0].length; i++){
-        menuStr += "<a href='http://localhost:8000/lookup/" + barChartInfo[0][i] + "'>" + barChartInfo[0][i] + "</a>&emsp;"
+        menuStr += "<a href='http://demo.ninjari.ninja:8000/lookup/" + barChartInfo[0][i] + "'>" + barChartInfo[0][i] + "</a>&emsp;"
     }
     document.getElementById("menu").innerHTML = menuStr; 
 }
-genMenu();
-
- 
+genMenu(); */

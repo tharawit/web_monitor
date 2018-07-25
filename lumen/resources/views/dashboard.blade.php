@@ -165,9 +165,8 @@
 </div>
 </div>
 <br>
-</div>  
-</div>  
-{{ $graph_data }}
+</div>
+</div>
 <script type="text/javascript">
   /* extract current data */
   var current_data_list = {!! $current_data !!}
@@ -181,7 +180,7 @@
 
 @section('graph_controller')
 <script type="text/javascript">
-  var graph_data = {!! $graph_data !!}
+    var graph_data = {!! $graph_data !!}
 </script>
 @endsection
 
