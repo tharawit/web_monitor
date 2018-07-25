@@ -42,6 +42,11 @@ $router->get('/fb-callback', function () use ($router) {
         if($checked_result == "baned"){
             return redirect('/logout');
         }else{
+            /* get user status */
+            $get_user_status = (array) app('db')->select("SELECT status FROM `user` WHERE `email` LIKE '".$user_data['email']."'");
+            $get_user_status = (array) $get_user_status[0];
+            $get_user_status = $get_user_status['status'];
+            $_SESSION['fb_status'] = $get_user_status;
             return redirect('/dashboard');
         }
     }else{
@@ -57,6 +62,7 @@ $router->get('/logout', function () use ($router) {
         unset($_SESSION['fb_id']);
         unset($_SESSION['fb_name']);
         unset($_SESSION['fb_email']);
+        unset($_SESSION['fb_status']);
         return redirect('/');
     }else{
         return redirect('/');
@@ -74,7 +80,8 @@ $router->get('/dashboard', function () use ($router) {
                 'pic' => 'https://graph.facebook.com/'.$_SESSION['fb_id'].'/picture',
                 'email' => $_SESSION['fb_email'],
                 'graph_data' => $data,
-                'current_data' => $current_data
+                'current_data' => $current_data,
+                'g_name' => $box_group_list
             ]
         );
     }else{
@@ -83,11 +90,11 @@ $router->get('/dashboard', function () use ($router) {
 });
 
 /* lookup fetch db */
-$router->get('/lookup/{name}', function ($name) use ($router) {
+$router->get('/lookup/{id}', function ($id) use ($router) {
     if($_SESSION['fb_authen']){
     header("Content-type: charset=utf-8");
-    $group_name_selected = urldecode($name);
-    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_name` LIKE '$group_name_selected'");
+    $group_name_selected = urldecode($id);
+    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_id` LIKE '$group_name_selected'");
     $results = json_encode($results, JSON_UNESCAPED_UNICODE);
     return view('lookup',
         [                

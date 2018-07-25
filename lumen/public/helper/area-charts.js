@@ -40,6 +40,14 @@ graph_set_color = [
         pointBackgroundColor: "rgba(225,116,237)",
         pointBorderColor: "rgba(255,255,255,0.8)",
         pointHoverBackgroundColor: "rgba(225,116,237)",
+    },
+    // line 6 
+    {
+        backgroundColor: "rgba(225,116,237,0.2)",
+        borderColor: "rgba(225,116,237,1)",
+        pointBackgroundColor: "rgba(225,116,237)",
+        pointBorderColor: "rgba(255,255,255,0.8)",
+        pointHoverBackgroundColor: "rgba(225,116,237)",
     }
 ];
 
@@ -166,6 +174,10 @@ var ctx = document.getElementById("myAreaChart"),
                     },
                     ticks: {
                         maxTicksLimit: 12
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Month'
                     }
                 }],
                 yAxes: [{
@@ -176,6 +188,10 @@ var ctx = document.getElementById("myAreaChart"),
                     },
                     gridLines: {
                         color: "rgba(0, 0, 0, .125)"
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Posts'
                     }
                 }]
             },
@@ -197,6 +213,7 @@ var ctx = document.getElementById("myAreaChart"),
                     "rgba(94,70,242,0.6)",
                     "rgba(70,242,118,0.6)",
                     "rgba(250,229,42,0.6)",
+                    "rgba(225,116,237,0.6)",
                     "rgba(225,116,237,0.6)"
                 ],
                 borderColor:[
@@ -204,7 +221,8 @@ var ctx = document.getElementById("myAreaChart"),
                     graph_set_color[1].borderColor,
                     graph_set_color[2].borderColor,
                     graph_set_color[3].borderColor,
-                    graph_set_color[4].borderColor
+                    graph_set_color[4].borderColor,
+                    graph_set_color[5].borderColor
                 ],
                 data: barChartInfo[1]
             }
@@ -227,7 +245,7 @@ var ctx = document.getElementById("myAreaChart"),
                     ticks: {
                         min: 0,
                         max: group_count_hightest_member,
-                        maxTicksLimit: 10
+                        maxTicksLimit: 5
                     },
                     gridLines: {
                         display: 1
@@ -268,13 +286,3 @@ var ctx = document.getElementById("myAreaChart"),
             }]
         }
     });
-
-// menu testing
-/* function genMenu(){
-    var menuStr = "";
-    for(var i = 0; i < barChartInfo[0].length; i++){
-        menuStr += "<a href='http://demo.ninjari.ninja:8000/lookup/" + barChartInfo[0][i] + "'>" + barChartInfo[0][i] + "</a>&emsp;"
-    }
-    document.getElementById("menu").innerHTML = menuStr; 
-}
-genMenu(); */

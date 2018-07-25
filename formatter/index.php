@@ -75,6 +75,7 @@ include('./formatter_config.php');
 <input name="groupname" type="text" placeholder="Group Name" class="form-control">
 <input name="groupid" type="number" placeholder="Group ID ( 0000000000 )" class="form-control">
 <input name="permalink" type="text" placeholder="Permalink ( https://facebook.com/groupExsample )" class="form-control">
+<input name="postid" type="number" placeholder="Post ID ( 0000000000 )" class="form-control">
 <br>
 <textarea name="detail" placeholder="Detail ( Post Topic )" class="form-control"></textarea>
 <div class="row">
@@ -231,6 +232,7 @@ $group_comment = $_POST['com'];
 $group_engagement = $_POST['eng'];
 $group_shared = $_POST['share'];
 $group_id = $_POST['groupid'];
+$post_id = $_POST['postid'];
 
 $sql_str = "INSERT INTO `survey_single` (
     `group_id`,
@@ -239,8 +241,9 @@ $sql_str = "INSERT INTO `survey_single` (
     `engagement`,
     `shared`,
     `perma_link`,
-    `detail`,    
-    `datetime`
+    `detail`,
+    `datetime`,
+    `post_id`
 ) VALUES (
     '".$group_id."',
     '".$group_name."',
@@ -248,11 +251,12 @@ $sql_str = "INSERT INTO `survey_single` (
     '".$group_engagement."',
     '".$group_shared."',
     '".$group_permalink."',
-    '".$group_detail."',
-    now()
+    '".trim($group_detail)."',
+    now(),
+    '".$post_id."'
 ) 
 ";
-easyInsert($sql_str );
+easyInsert($sql_str);
 $_SESSION['genD_status'] = 'noti';
 header('location: ./index.php');
 break;
@@ -354,6 +358,11 @@ case 5:
             `survey_single_id` int(5) NOT NULL,
             `email` varchar(200) NOT NULL
         ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+    ",
+    "
+        ALTER TABLE `survey_single`  ADD post_id varchar(200) NOT NULL
+    ",
+    "
     "
     ];
     FormatterConnect::Open();
@@ -385,7 +394,7 @@ case 7:
     $result_value = FormatterConnect::Query($sql_str2, true);
     FormatterConnect::Close();
     echo "<hr>&emsp;<h3>SELECT TABLE : <span style=\"color:#0099ff;\">".$table."</span></h3></hr>";
-    echo "<table class=\"table table-striped table-bordered table-hover\">";
+    echo "<table class=\"table table-striped table-bordered table-hover\" style=\"zoom: 70%;\">";
     echo "<tr>";
     foreach($result_column as $col){
         echo "<td>".$col['Field']."</td>";
@@ -394,7 +403,7 @@ case 7:
     foreach($result_value as $value_row){
         echo "<tr>";
         foreach($value_row as $value_col){
-            echo "<td>".$value_col."</td>";
+            echo "<td>".substr($value_col,0, 200)."</td>";
         }
         echo "</tr>";
     }

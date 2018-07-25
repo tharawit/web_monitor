@@ -101,6 +101,7 @@
     <script src="vendor/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="vendor/Chart.min.js"></script>
+    <!-- <script src="http://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script> -->
     <script src="vendor/jquery.dataTables.js"></script>
     <script src="vendor/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
