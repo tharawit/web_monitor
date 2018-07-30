@@ -355,7 +355,7 @@ case 5:
         CREATE TABLE `survey_monitor` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             PRIMARY KEY (`id`),
-            `survey_single_id` int(5) NOT NULL,
+            `survey_single_id` varchar(200) NOT NULL,
             `email` varchar(200) NOT NULL
         ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
     ",

@@ -94,13 +94,13 @@ $router->get('/lookup/{id}', function ($id) use ($router) {
     if($_SESSION['fb_authen']){
     header("Content-type: charset=utf-8");
     $group_name_selected = urldecode($id);
-    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_id` LIKE '$group_name_selected'");
+    $results = app('db')->select("SELECT* FROM `survey_single` WHERE `group_id` LIKE '$group_name_selected' ORDER BY datetime DESC");
     $results = json_encode($results, JSON_UNESCAPED_UNICODE);
     return view('lookup',
         [                
             'name' => $_SESSION['fb_name'],
             'pic' => 'https://graph.facebook.com/'.$_SESSION['fb_id'].'/picture',
-            'email' => $_SESSION['fb_email'],
+            'fb_mail' => $_SESSION['fb_email'],
             'posts' => $results
         ]
     );
@@ -127,11 +127,14 @@ $router->get('/profile', function () use ($router) {
 /* survey */
 $router->get('/survey', function () use ($router) {
     if($_SESSION['fb_authen']){
+        include('../helper/survey_monitor.php');
+        $data = load_survey_monitor($_SESSION['fb_email']);
         return view('survey',
         [                
             'name' => $_SESSION['fb_name'],
             'pic' => 'https://graph.facebook.com/'.$_SESSION['fb_id'].'/picture',
-            'email' => $_SESSION['fb_email']
+            'email' => $_SESSION['fb_email'],
+            'data' => $data,
         ]
     );
     }else{
@@ -153,3 +156,42 @@ $router->get('/setting', function () use ($router) {
         return redirect('/');
     }
 });
+
+
+/* add survey monitor */
+$router->post('/add/monitor', function (Illuminate\Http\Request $request) {
+    if($_SESSION['fb_authen']){
+        include('../helper/survey_monitor.php');
+        $post_id = $request->input('post_id');
+        $email = $request->input('email');
+        add_survey_monitor($post_id, $email);
+        return redirect('/survey');
+    }else{
+        return redirect('/');
+    }
+});
+
+
+/* add survey monitor */
+$router->post('/del/monitor', function (Illuminate\Http\Request $request) {
+    if($_SESSION['fb_authen']){
+        $post_id = $request->input('post_id');
+        DB::table('survey_monitor')->where('survey_single_id', $post_id)->delete();
+        //app('db')->select("DELETE FROM `survey_monitor` WHERE `survey_single_id` LIKE '".$post_id."'");
+        return redirect('/survey');
+    }else{
+        return redirect('/');
+    }
+});
+
+/* feed  */
+$router->get('/feed', function () use ($router) {
+    if($_SESSION['fb_authen']){
+        header("Content-type: charset=utf-8");
+        $data = app('db')->select("SELECT* FROM `survey_single` ORDER BY datetime ASC");
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }else{
+        return redirect('/');
+    }
+});
+

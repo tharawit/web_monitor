@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>@yield('title')</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="../vendor/bootstrap.min.css" rel="stylesheet" type="text/css">>
         <link href="../css/sb-admin.css" rel="stylesheet" type="text/css">>
@@ -40,10 +41,10 @@
                             <span class="nav-link-text">Survey</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Setting">
-                        <a class="nav-link" href="/setting">
-                            <i class="fa fa-fw fa-gears"></i>
-                            <span class="nav-link-text">Setting</span>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Feed">
+                        <a class="nav-link" href="/feed">
+                            <i class="fa fa-fw fa-feed"></i>
+                            <span class="nav-link-text">Feed</span>
                         </a>
                     </li>        
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="">
