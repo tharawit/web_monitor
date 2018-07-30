@@ -2,6 +2,7 @@
     <head>
         <title>@yield('title')</title>
         <meta charset="utf-8">
+        <link rel="shortcut icon" href="../pics/analysis.png">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="../vendor/bootstrap.min.css" rel="stylesheet" type="text/css">>
         <link href="../css/sb-admin.css" rel="stylesheet" type="text/css">>

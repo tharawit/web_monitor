@@ -8,6 +8,7 @@ $helper = $fb->getRedirectLoginHelper();
   $permissions = ['email']; // Optional permissions
 $loginUrl = $helper->getLoginUrl('http://demo.ninjari.ninja:8000/fb-callback', $permissions);
 echo "
+        <link rel=\"shortcut icon\" href=\"../pics/analysis.png\">
         <style>
             body{
                 background:#343a40;
@@ -68,9 +69,14 @@ echo "
                 background:#E74B37;
             }
         </style>
+        <center>
+        <div style=\"margin-top:100px;\">
+            <img class=\"card-img-top\" style=\"width:400px;height:350px;\" src=\"https://i.giphy.com/media/l46Cy1rHbQ92uuLXa/giphy.webp\">
+        </div>
         <div class=\"loginDivBox\">
         <a href='". htmlspecialchars($loginUrl) ."'>
             <button class='loginBtn loginBtn--facebook'>Login with Facebook</button>
         </a>
         </div>
+        </center>
         ";
